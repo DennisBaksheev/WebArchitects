@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Package</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Custom Package</h1>
+    <p>Select the services you want to include in your custom package.</p>
+    
+    
+    <form id="services-form">
+        <!-- Add your services here -->
+        <div>
+            <input type="checkbox" id="service1" name="services" value="100">
+            <label for="service1">Service 1 - $100</label>
+        </div>
+        <div>
+            <input type="checkbox" id="service2" name="services" value="200">
+            <label for="service2">Service 2 - $200</label>
+        </div>
+        <div>
+            <input type="checkbox" id="service3" name="services" value="300">
+            <label for="service3">Service 3 - $300</label>
+        </div>
+        <!-- Add more services as needed -->
+
+        <h2>Subtotal: <span id="subtotal">0</span></h2>
+    </form>
+
+    <!-- payment form -->
+    <form id="payment-form">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="card-element">Card Information:</label>
+            <div id="card-element"></div>
+        </div>
+        <button id="submit-payment">Pay Now</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const servicesForm = document.getElementById('services-form');
+            const subtotalElem = document.getElementById('subtotal');
+
+            servicesForm.addEventListener('change', () => {
+                let subtotal = 0;
+                const checkedServices = servicesForm.querySelectorAll('input[type=checkbox]:checked');
+                checkedServices.forEach(service => {
+                    subtotal += parseInt(service.value);
+                });
+                subtotalElem.textContent = subtotal;
+            });
+        });
+    </script>
+
+    <!-- Add your existing Stripe integration code here -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
